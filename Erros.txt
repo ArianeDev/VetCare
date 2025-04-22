@@ -1,0 +1,1 @@
+As tabelas não estavam sendo criadas, pois faltou parenteses na função 
