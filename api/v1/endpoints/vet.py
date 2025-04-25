@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from schemas.animal_schema import AnimalSchema
 from models.animal_model import AnimalModel
+
 from core.deps import get_session
 
 router = APIRouter()
