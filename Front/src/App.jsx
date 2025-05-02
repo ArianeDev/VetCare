@@ -1,4 +1,5 @@
-import { ListAnimais } from "./Componentes/ListAnimais"
+import { ListAnimais } from "./Componentes/ListAnimais";
+import './App.css';
 
 function App() {
 

@@ -7,7 +7,7 @@ class AnimalSchema(SCBaseModel):
 	cor: str
 	raca: str
 	foto: str
-	pessoa: int
+	pessoa_id: int
 
 	class Config:
 		orm_mode = True

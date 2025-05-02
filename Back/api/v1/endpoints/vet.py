@@ -1,6 +1,7 @@
 from typing import List
 from fastapi import APIRouter, status, Depends, HTTPException, Response
 
+from sqlalchemy.orm import joinedload
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -16,7 +17,8 @@ async def post_animal(animal: AnimalSchema, db: AsyncSession = Depends(get_sessi
 	new_animal = AnimalModel(nome=animal.nome,
 						  	 cor=animal.cor,
 							 raca=animal.raca,
-							 foto=animal.foto)
+							 foto=animal.foto,
+							 pessoa_id=animal.pessoa_id)
 	db.add(new_animal)
 	await db.commit()
 	return new_animal
@@ -24,7 +26,7 @@ async def post_animal(animal: AnimalSchema, db: AsyncSession = Depends(get_sessi
 @router.get("/", response_model=List[AnimalSchema])
 async def get_animais(db:AsyncSession = Depends(get_session)):
 	async with db as session:
-		query = select(AnimalModel)
+		query = select(AnimalModel).options(joinedload(AnimalModel.pessoa))
 		result = await session.execute(query)
 		animal: List[AnimalModel] = result.scalars().all()
 
@@ -33,7 +35,7 @@ async def get_animais(db:AsyncSession = Depends(get_session)):
 @router.get("/{animal_id}", response_model=AnimalSchema)
 async def get_animal(animal_id: int, db: AsyncSession = Depends(get_session)):
 	async with db as session:
-		query = select(AnimalModel).filter(AnimalModel.id == animal_id)
+		query = select(AnimalModel).filter(AnimalModel.id == animal_id).options(joinedload(AnimalModel.pessoa))
 		result = await session.execute(query)
 		animal = result.scalar_one_or_none()
 
@@ -45,7 +47,7 @@ async def get_animal(animal_id: int, db: AsyncSession = Depends(get_session)):
 @router.put("/{animal_id}", response_model=AnimalSchema, status_code=status.HTTP_202_ACCEPTED)
 async def put_animal(animal_id: int, animal: AnimalSchema, db:AsyncSession = Depends(get_session)):
 	async with db as session:
-		query = select(AnimalModel).filter(AnimalModel.id == animal_id)
+		query = select(AnimalModel).filter(AnimalModel.id == animal_id).options(joinedload(AnimalModel.pessoa))
 		result = await session.execute(query)
 		animal_up = result.scalar_one_or_none()
 
@@ -54,6 +56,7 @@ async def put_animal(animal_id: int, animal: AnimalSchema, db:AsyncSession = Dep
 			animal_up.cor = animal.cor
 			animal_up.raca = animal.raca
 			animal_up.foto = animal.foto
+			animal_up.pessoa_id = animal.pessoa_id
 
 			await session.commit()
 			return animal_up
@@ -63,7 +66,7 @@ async def put_animal(animal_id: int, animal: AnimalSchema, db:AsyncSession = Dep
 @router.delete("/{animal_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_animal(animal_id: int, db: AsyncSession = Depends(get_session)):
 	async with db as session:
-		query = select(AnimalModel).filter(AnimalModel.id == animal_id)
+		query = select(AnimalModel).filter(AnimalModel.id == animal_id).options(joinedload(AnimalModel.pessoa))
 		result = await session.execute(query)
 		animal_del = result.scalar_one_or_none()
 

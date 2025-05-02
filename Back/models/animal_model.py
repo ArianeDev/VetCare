@@ -1,5 +1,5 @@
 from core.configs import settings
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models.pessoa_model import PessoaModel
 
@@ -11,4 +11,6 @@ class AnimalModel(settings.DBBaseModel):
 	cor: str = Column(String(255))
 	raca: str = Column(String(255))
 	foto: str = Column(String(255))
-	pessoa = relationship("PessoaModel", back_populates='animal')
+
+	pessoa_id: int = Column(Integer(), ForeignKey("pessoas.id"))
+	pessoa = relationship("PessoaModel", back_populates="animais", remote_side="PessoaModel.id")

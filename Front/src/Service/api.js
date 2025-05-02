@@ -1,14 +1,7 @@
-const API_URL = 'http://localhost:8000/api/v1/';
+import axios from 'axios'
 
-const basicFetch = async (endpoint) => {
-    const req = await fetch(`${API_URL}${endpoint}`);
-    const json = await req.json();
-    return json;
-}
+const api = axios.create({
+    baseURL: 'http://localhost:8000/api/v1'
+})
 
-export default {
-    get_infosAnimais: async () => {
-        return await basicFetch(`animal/`)
-    }
-
-}
+export default api

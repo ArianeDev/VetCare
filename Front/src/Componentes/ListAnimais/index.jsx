@@ -1,33 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from '../Card';
+import { Table } from '../Table';
 import api from '../../Service/api';
+import './style.sass'
 
-export function ListAnimais(){
+export function ListAnimais({ type }){
     const [animaisList, setAnimaisList] = useState([]);
 
-    // useEffect(() => {
-    //     const infoAPI = async () => {
-    //         let infoAnimal = await api.get_infosAnimais();
+    async function getAnimal() {
+        const animalsAPI = await api.get('/animal')
+        const listAnimal = Object.values(animalsAPI.data);
+        setAnimaisList(listAnimal);
+    }
 
-    //         setAnimaisList(infoAnimal);
-    //         console.log(infoAnimal)
-    //     }
-
-    //     infoAPI();
-    // })
-
-    const dado = [
-        {
-            "nome": "Ariane",
-            "img": "https://thaka.bing.com/th/id/OIP.EU4rGtqFQAtuj4azJqkkvQHaFD?w=302&h=206&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2"
-        }
-    ]
+    useEffect(() => {
+        getAnimal()
+    }, [])
 
     return(
-        <div>
-            {dado.map((dado, key) => (
-                <Card key={key} dado={dado}/>
-            ))}
-        </div>
+        <>
+            {type === "card" ? (
+                <div className='containerList'>
+                    {animaisList.map((dado, key) => (
+                        <Card key={key} dado={dado} />
+                    ))}
+                </div>
+            ) : (
+                <div className="containerTable">
+                    <table>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Raça</td>
+                            <td>Cor</td>
+                        </tr>
+                    </table>
+                    {animaisList.map((dado, key) => (
+                        <Table key={key} dado={dado} />
+                    ))}
+                </div>
+            )}
+        </>
     )
 }
