@@ -32,12 +32,15 @@ async def get_animais(db:AsyncSession = Depends(get_session)):
 
 		return animal
 
-@router.get("/{animal_id}", response_model=AnimalSchema)
-async def get_animal(animal_id: int, db: AsyncSession = Depends(get_session)):
+@router.get("/{dono_id}", response_model=List[AnimalSchema])
+async def get_animal(dono_id: int, db: AsyncSession = Depends(get_session)):
+# 	if current_user.id != dono_id:
+# 		raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Não tem permissão")
 	async with db as session:
-		query = select(AnimalModel).filter(AnimalModel.id == animal_id).options(joinedload(AnimalModel.pessoa))
+		
+		query = select(AnimalModel).filter(AnimalModel.pessoa_id == dono_id).options(joinedload(AnimalModel.pessoa)) #testar com id do dono
 		result = await session.execute(query)
-		animal = result.scalar_one_or_none()
+		animal: List[AnimalModel] = result.scalars().all()
 
 		if animal:
 			return animal
