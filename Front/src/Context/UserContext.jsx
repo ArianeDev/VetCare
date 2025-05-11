@@ -14,7 +14,20 @@ export const UserProvider = (props) => {
 					Authorization: "Bearer" + token,
 				},
 			};
-			const response = await fec
+			const response = await fetch("api/v1/pessoa/user", requestOptions);
+
+			if (!response.ok){
+				setToken(null);
+			}
+
+			localStorage.setItem("awesomeLeadsToken", token)
 		};
-	});
+		fetchUser();
+	}, [token]);
+
+	return(
+		<UserContext.Provider value={[token, setToken]}>
+			{props.children}
+		</UserContext.Provider>
+	)
 };

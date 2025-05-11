@@ -7,8 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from schemas.animal_schema import AnimalSchema
 from models.animal_model import AnimalModel
+from schemas.pessoa_schema import PessoaSchema
 
 from core.deps import get_session
+from app.utils import get_current_user
+
 
 router = APIRouter()
 
@@ -33,9 +36,8 @@ async def get_animais(db:AsyncSession = Depends(get_session)):
 		return animal
 
 @router.get("/{dono_id}", response_model=List[AnimalSchema])
-async def get_animal(dono_id: int, db: AsyncSession = Depends(get_session)):
-# 	if current_user.id != dono_id:
-# 		raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Não tem permissão")
+async def get_animal(dono_id: int, db: AsyncSession = Depends(get_session), user: PessoaSchema = Depends(get_current_user)):
+
 	async with db as session:
 		
 		query = select(AnimalModel).filter(AnimalModel.pessoa_id == dono_id).options(joinedload(AnimalModel.pessoa)) #testar com id do dono

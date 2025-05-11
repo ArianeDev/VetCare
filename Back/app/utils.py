@@ -57,9 +57,7 @@ async def authenticate_user(email: str, password: str, db: AsyncSession):
 # Criando o token
 def create_access_token(pessoa: PessoaModel) -> str:
     user_obj = PessoaSchema.model_validate(pessoa)
-
     token = jwt.encode(user_obj.model_dump(), JWT_SECRET_KEY)
-
     return {"access_token": token, "token_type": "bearer"}
 
 async def get_current_user(db: Session = Depends(get_session), token: str = Depends(oauth2_scheme)):

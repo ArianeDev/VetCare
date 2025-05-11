@@ -1,6 +1,6 @@
 import { React } from 'react';
 
-export function ErrorMenssage({menssage}){
+export function ErrorMessage({menssage}){
 	return(
 		<p>{menssage}</p>
 	)
