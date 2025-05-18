@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../Context/UserContext';
 import { Card } from '../Card';
 import { Table } from '../Table';
 import api from '../../Service/api';
@@ -6,11 +7,21 @@ import './style.sass'
 
 export function ListAnimais({ type }){
     const [animaisList, setAnimaisList] = useState([]);
+    const [token] = useContext(UserContext);
 
     async function getAnimal() {
-        const animalsAPI = await api.get('/animal')
-        const listAnimal = Object.values(animalsAPI.data);
-        setAnimaisList(listAnimal);
+        try{
+            const response = await api.get('/animal', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+    
+            const listAnimal = response.data;
+            setAnimaisList(listAnimal)
+        } catch (error) {
+            console.error("Erro ao buscar animais: ", error)
+        }
     }
 
     useEffect(() => {
@@ -28,15 +39,16 @@ export function ListAnimais({ type }){
             ) : (
                 <div className="containerTable">
                     <table>
-                        <tr>
-                            <td>Nome</td>
-                            <td>Raça</td>
-                            <td>Cor</td>
-                        </tr>
-                    </table>
+                        <thead>
+                            <th>Nome</th>
+                            <th>Raça</th>
+                            <th>Cor</th>
+                            <th className='actionData'>Ações</th>
+                        </thead>
                     {animaisList.map((dado, key) => (
                         <Table key={key} dado={dado} />
                     ))}
+                    </table>
                 </div>
             )}
         </>

@@ -7,19 +7,15 @@ class PessoaSchema(SCBaseModel):
     email: str
     cpf: str
     endereco: str
+    password: str
     
     class Config:
         orm_mode = True
         from_attributes = True # converte um objeto SQLAIchemy em objeto Pydantic
 
-class PessoaCreate(PessoaSchema):
-    password: str
-
-    class Config:
-        orm_mode = True
-
 class Token(SCBaseModel):
-    access: str
+    user: PessoaSchema
+    access_token: str
     token_type: str
 
 class LoginData(SCBaseModel):

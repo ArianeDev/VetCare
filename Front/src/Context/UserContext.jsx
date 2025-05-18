@@ -11,16 +11,19 @@ export const UserProvider = (props) => {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: "Bearer" + token,
+					Authorization: "Bearer " + token,
 				},
 			};
-			const response = await fetch("api/v1/pessoa/user", requestOptions);
-
-			if (!response.ok){
-				setToken(null);
+			try {
+				const response = await fetch("http://localhost:8000/api/v1/pessoa/user", requestOptions);
+				if (!response.ok) {
+					console.error("Token inválido");
+					setToken(null);
+					localStorage.removeItem("awesomeLeadsToken");
+				}
+			} catch (err) {
+				console.error("Erro na requisição:", err);
 			}
-
-			localStorage.setItem("awesomeLeadsToken", token)
 		};
 		fetchUser();
 	}, [token]);

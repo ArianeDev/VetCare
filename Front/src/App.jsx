@@ -1,12 +1,9 @@
-
-import { Home } from "./Pages/Home";
+import { PageStart } from "./Pages/PageStart";
 
 function App() {
 
   return (
-    <>
-      <Home />
-    </>
+      <PageStart />
   )
 }
 

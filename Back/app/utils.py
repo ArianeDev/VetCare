@@ -6,7 +6,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from models.pessoa_model import PessoaModel
-from schemas.pessoa_schema import PessoaCreate, PessoaSchema
+from schemas.pessoa_schema import PessoaSchema
 from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
@@ -22,9 +22,9 @@ JWT_REFRESH_SECRET_KEY = secrets.token_hex(10)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/pessoa/token")
 
-# verificar email
-async def get_user_by_email(email: str, db: AsyncSession):
-    user = select(PessoaModel).where(PessoaModel.email == email)
+# verificar username
+async def get_user_by_email(username: str, db: AsyncSession):
+    user = select(PessoaModel).where(PessoaModel.username == username)
     result = await db.execute(user)
     return result.scalars().first()
 
@@ -32,7 +32,7 @@ async def get_user_by_email(email: str, db: AsyncSession):
 async def verify_password(password, hashed_password) -> bool:
     return pwd_context.verify(password, hashed_password)
 
-async def create_pessoa(pessoa: PessoaCreate, db: Session):
+async def create_pessoa(pessoa: PessoaSchema, db: Session):
     user_obj = PessoaModel(email=pessoa.email, 
                            username=pessoa.username,
                            cpf=pessoa.cpf,
@@ -46,6 +46,8 @@ async def create_pessoa(pessoa: PessoaCreate, db: Session):
 async def authenticate_user(email: str, password: str, db: AsyncSession):
     user = await get_user_by_email(email, db)
 
+    print(user)
+
     if not user:
         return False
     
@@ -56,8 +58,8 @@ async def authenticate_user(email: str, password: str, db: AsyncSession):
 
 # Criando o token
 def create_access_token(pessoa: PessoaModel) -> str:
-    user_obj = PessoaSchema.model_validate(pessoa)
-    token = jwt.encode(user_obj.model_dump(), JWT_SECRET_KEY)
+    user_data = {"id": pessoa.id, "email": pessoa.email, "username": pessoa.username}
+    token = jwt.encode(user_data, JWT_SECRET_KEY, algorithm=ALGORITHM)
     return {"access_token": token, "token_type": "bearer"}
 
 async def get_current_user(db: Session = Depends(get_session), token: str = Depends(oauth2_scheme)):
