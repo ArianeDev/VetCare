@@ -43,7 +43,7 @@ export function ListAnimais({ type }){
                             <th>Nome</th>
                             <th>Raça</th>
                             <th>Cor</th>
-                            <th className='actionData'>Ações</th>
+                            <th>Ações</th>
                         </thead>
                     {animaisList.map((dado, key) => (
                         <Table key={key} dado={dado} />

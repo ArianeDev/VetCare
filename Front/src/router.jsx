@@ -4,7 +4,7 @@ import GlobalLayot from './Layout';
 import { PageStart } from './Pages/PageStart';
 import { Home } from './Pages/Home';
 import { RegisterAnimal } from './Pages/RegisterAnimal';
-import { ProtectedRoute } from './routes/ProtectedRoute';
+import { ProtectedRoute } from './protectedRouter';
 
 const router = createBrowserRouter([
 	{
@@ -16,7 +16,6 @@ const router = createBrowserRouter([
 		element: <ProtectedRoute />,
 		children: [
 			{
-				path: "/",
 				element: <GlobalLayot />,
 				children: [
 					{
