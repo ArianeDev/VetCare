@@ -1,12 +1,13 @@
 import { ListAnimais } from "../../Componentes/ListAnimais"
 import { Header } from "../../Componentes/Header"
 import { RegisterAnimal } from "../RegisterAnimal"
+import './style.sass';
 
 export function Home(){
 	return(
 		<>
 			<Header />
-			<ListAnimais type="card"/>
+			{/* <ListAnimais type="card"/> */}
 			<ListAnimais type="tabela"/>
 		</>
 	)

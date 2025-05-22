@@ -6,40 +6,44 @@
 
 $color-white: rgb(255,255,255)
 
-table
-	background-color: $color-white
-	border-radius: 0.2rem
-	padding: 1rem
-	width: 82vw
-	margin-top: 1rem
+.containerTable
+	display: flex
+	justify-content: center
 
-	thead
-		height: 6vh
+	table
+		background-color: $color-white
+		border-radius: 0.2rem
+		padding: 1rem
+		width: 82vw
+		margin-top: 1rem
 
-		th
-			font-weight: 500
-			word-wrap: break-word
-			overflow-wrap: break-word
+		thead
+			height: 6vh
 
-	tbody
+			th
+				font-weight: 500
+				word-wrap: break-word
+				overflow-wrap: break-word
 
-		td
-			word-wrap: break-word
-			overflow-wrap: break-word
-			padding: 0 1rem
+		tbody
 
-		.itensTable
-			text-align: center
-		
-		.icons
-			display: flex
-			flex-direction: row-reverse
-			justify-content: space-between
-			height: 10vh
-			align-items: center
+			td
+				word-wrap: break-word
+				overflow-wrap: break-word
+				padding: 0 1rem
 
-			.trash
-				color: rgb(218, 0, 0)
+			.itensTable
+				text-align: center
+			
+			.icons
+				display: flex
+				flex-direction: row-reverse
+				justify-content: space-between
+				height: 10vh
+				align-items: center
 
-			.userPen
-				color: rgb(167, 167, 167)
+				.trash
+					color: rgb(218, 0, 0)
+
+				.userPen
+					color: rgb(167, 167, 167)

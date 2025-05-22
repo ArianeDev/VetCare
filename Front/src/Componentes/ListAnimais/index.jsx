@@ -9,6 +9,16 @@ export function ListAnimais({ type }){
     const [animaisList, setAnimaisList] = useState([]);
     const [token] = useContext(UserContext);
 
+    async function delAnimal(id) {
+		await api.delete(`/animal/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+        getAnimal()
+	}
+
     async function getAnimal() {
         try{
             const response = await api.get('/animal', {
@@ -46,7 +56,7 @@ export function ListAnimais({ type }){
                             <th className='actionData'>Ações</th>
                         </thead>
                     {animaisList.map((dado, key) => (
-                        <Table key={key} dado={dado} />
+                        <Table key={key} dado={dado} delAnimal={delAnimal}/>
                     ))}
                     </table>
                 </div>

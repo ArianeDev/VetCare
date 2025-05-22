@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
+import { Squirrel } from 'lucide-react';
+import './style.sass';
 
 export function Header(){
 	const [token, setToken] = useContext(UserContext);
@@ -8,8 +10,14 @@ export function Header(){
 		setToken(null);
 	}
 	return(
-		<div>
-			{token && (<button onClick={handleLogout}>Sair</button>)}
-		</div>
+		<header>
+			<div className="logo">
+				<h1>VetCare</h1>
+				<Squirrel className="squirrel"/>
+			</div>
+			<div className="buttonLogOut">
+				{token && (<button onClick={handleLogout} className="button">Sair</button>)}
+			</div>
+		</header>
 	)
 }

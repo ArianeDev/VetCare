@@ -1,15 +1,17 @@
 import { UserPen } from 'lucide-react';
 import { Trash2 } from 'lucide-react';
 
-export function Table({ dado }){
+export function Table({ key, dado, delAnimal }){
 	return(
 		<tbody>
-			<tr>
+			<tr key={dado.id || key }>
 				<td className='itensTable'>{dado.nome}</td>
 				<td className='itensTable'>{dado.raca}</td>
 				<td className='itensTable'>{dado.cor}</td>
 				<td className='icons'>
-					<Trash2 className='trash'/>
+					<button onClick={() => delAnimal(dado.id)}>
+						<Trash2 className='trash'/>
+					</button>
 					<UserPen className='userPen'/>
 				</td>
 			</tr>
