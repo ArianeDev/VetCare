@@ -14,16 +14,21 @@ export function PageStart(){
 		<div>
 			{isRegistering ? (
 				<>
-					<Register />
-					<p>Já tem uma conta? <button onClick={() => setIsRegistering(false)}>Fazer login</button></p>
+					<div className="containerRegister">
+						<h1>Cadastro</h1>
+						<Register />
+						<p>Já tem uma conta? <button onClick={() => setIsRegistering(false)}>Fazer login</button></p>
+					</div>
 				</>
 			) : (
 				<>
-					<Login />
-					<p>Não tem uma conta? <button onClick={() => setIsRegistering(true)}>Cadastrar-se</button></p>
+					<div className="containerLogin">
+						<h1>Login</h1>
+						<Login />
+						<p>Não tem uma conta? <button onClick={() => setIsRegistering(true)}>Cadastrar-se</button></p>
+					</div>
 				</>
-			)
-			} 
+			)} 
 		</div>
 	)
 }

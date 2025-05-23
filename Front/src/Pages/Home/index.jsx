@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import { ListAnimais } from "../../Componentes/ListAnimais"
-import { Header } from "../../Componentes/Header"
-import { RegisterAnimal } from "../RegisterAnimal"
-=======
 import { useState } from "react";
 import { RegisterAnimal } from "../RegisterAnimal";
 import { ListAnimais } from "../../Componentes/ListAnimais";
 import { Header } from "../../Componentes/Header";
->>>>>>> 0941e8c39b53d5b18f0362587605eb20ae317689
 import './style.sass';
 
 export function Home(){
@@ -15,6 +9,7 @@ export function Home(){
 
 	return(
 		<>
+			<Header />	
 			{isRegisteringHome ? (
 				<>
 					<div className="buttonNavContainer">
@@ -32,7 +27,6 @@ export function Home(){
 
 			)}
 
-			{/* <Header /> */}
 			
 		</>
 	)

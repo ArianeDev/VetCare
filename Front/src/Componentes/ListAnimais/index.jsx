@@ -2,12 +2,25 @@ import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../Context/UserContext';
 import { Card } from '../Card';
 import { Table } from '../Table';
+import { Modal } from '../Modal';
 import api from '../../Service/api';
 import './style.sass'
 
 export function ListAnimais({ type }){
+    const [isOpen, setIsOpen] = useState(false);
+    const [animalSelecionado, setAnimalSelecionado] = useState(null);
     const [animaisList, setAnimaisList] = useState([]);
     const [token] = useContext(UserContext);
+
+    function handleOpenModal(animal) {
+        setAnimalSelecionado(animal);
+        setIsOpen(true);
+    }
+
+    function handleCloseModal() {
+        setAnimalSelecionado(null);
+        setIsOpen(false);
+    }
 
     async function delAnimal(id) {
 		await api.delete(`/animal/${id}`, {
@@ -56,10 +69,18 @@ export function ListAnimais({ type }){
                             <th>Ações</th>
                         </thead>
                     {animaisList.map((dado, key) => (
-                        <Table key={key} dado={dado} delAnimal={delAnimal}/>
+                        <Table key={key} dado={dado} delAnimal={delAnimal} onEdit={handleOpenModal}/>
                     ))}
                     </table>
                 </div>
+            )}
+
+            {isOpen && (
+                <Modal
+                    isOpen={isOpen}
+                    onClose={handleCloseModal}
+                    animalSelecionado={animalSelecionado}
+                />
             )}
         </>
     )
