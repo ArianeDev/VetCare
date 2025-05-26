@@ -46,8 +46,6 @@ async def create_pessoa(pessoa: PessoaSchema, db: Session):
 async def authenticate_user(email: str, password: str, db: AsyncSession):
     user = await get_user_by_email(email, db)
 
-    print(user)
-
     if not user:
         return False
     

@@ -79,7 +79,7 @@ export function ListAnimais({ type }){
                 <Modal
                     isOpen={isOpen}
                     onClose={handleCloseModal}
-                    animalSelecionado={animalSelecionado}
+                    animalSelecionado={animaisList}
                 />
             )}
         </>

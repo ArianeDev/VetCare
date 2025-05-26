@@ -52,6 +52,7 @@ export function RegisterAnimal(){
 			setCor("")
 			setCor("")
 			setRaca("")
+			setFoto("")
 
 		} catch (error) {
 			console.error("Erro na requisição:", error);
