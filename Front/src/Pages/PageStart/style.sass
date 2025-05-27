@@ -8,9 +8,71 @@
 body
 	background-color: rgb(240, 240, 240)
 
-	.containerRegister
+	.containerPageStart
 		display: flex
 		justify-content: center
 		align-items: center
 		height: 100vh
-		width: 100%
+
+		.containerRegister
+			width: 70%
+			height: 100%
+			margin-top: 2rem
+		
+		.containerLogin
+			width: 70%
+			height: 80%
+
+		.containerLogin, .containerRegister
+			display: flex
+			justify-content: space-around
+
+			.information
+				display: flex
+				flex-direction: column
+				align-items: center
+				width: 50%
+				height: 100%
+				background-image: linear-gradient(180deg, rgb(0, 129, 131), rgb(0, 61, 62))
+				color: rgb(255, 255, 255)
+				border-radius: 0.2rem 0 0 0.2rem
+		
+				.logo
+					display: flex
+					align-items: center
+					flex-direction: row-reverse
+					height: 40%
+					font-size: 30px
+
+					.squirrel
+						height: 6rem
+						width: 6rem
+
+				.text
+					display: flex
+					align-items: center
+					flex-direction: column
+					height: 60%
+
+					h1
+						font-size: 40px
+
+			.forms
+				display: flex
+				flex-direction: column
+				justify-content: space-evenly
+				align-items: center
+				width: 50%
+				height: 100%
+				background-color: rgb(255, 255, 255)
+
+				.buttonLogin
+					border: none
+					background-color: transparent
+					color: rgb(0, 129, 131)
+					font-weight: 500
+					margin-left: 0.5rem
+					transition: all .2s
+				
+				.buttonLogin:hover
+					color: rgb(186, 186, 186)

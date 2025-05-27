@@ -13,10 +13,9 @@ export function Modal({animalSelecionado, onClose, isOpen}){
     const [errorMenssage, setErrorMenssage] = useState('');
     const [token] = useContext(UserContext)
 
-    console.log(animalSelecionado[0].nome)
     useEffect(() => {
         if(animalSelecionado){
-            setNome(animalSelecionado[0].nome);
+            setNome(animalSelecionado.nome);
             setCor(animalSelecionado.cor);
             setRaca(animalSelecionado.raca);
             setFoto(animalSelecionado.foto);
@@ -33,8 +32,14 @@ export function Modal({animalSelecionado, onClose, isOpen}){
 		try{
 			const response = await api.put(`/animal/${animalSelecionado.id}`, updateAnimal, {headers: {Authorization: `Bearer ${token}`}});
 			console.log("Animal atualizado com sucesso", response.data)
+            onClose()
 
 		} catch (error) {
+            console.log("Dados enviados:", updateAnimal);
+            console.error("Erro no servidor:", error.response.data);
+            console.log("ID do animal:", animalSelecionado.id);
+
+
 			console.error("Erro na requisição:", error);
 			setErrorMenssage("Erro ao atualizar. Tente novamente.");
 		}
@@ -48,25 +53,25 @@ export function Modal({animalSelecionado, onClose, isOpen}){
     const listInputAtualizar = [
         {
             "type": "text",
-            "value": animalSelecionado[0].nome,
+            "value": nome,
             "setFunction": setNome,
             "labelName": "Nome"
         },
         {
             "type": "text",
-            "value": animalSelecionado[0].cor || "",
+            "value": cor,
             "setFunction": setCor,
             "labelName": "Cor"
         },
         {
             "type": "text",
-            "value": animalSelecionado[0].raca || "",
+            "value": raca,
             "setFunction": setRaca,
             "labelName": "Raça"
         },
         {
             "type": "text",
-            "value": animalSelecionado[0].foto || "",
+            "value": foto,
             "setFunction": setFoto,
             "labelName": "Foto"
         }
@@ -88,7 +93,7 @@ export function Modal({animalSelecionado, onClose, isOpen}){
                         <ErrorMessage menssage={errorMenssage} />
                     </div>
                     <div className="header">
-                        <img src={animalSelecionado[0].foto} alt="Fotinha do pet" />
+                        <img src={animalSelecionado.foto} alt="Fotinha do pet" />
                     </div>
                 </div>
             </div>

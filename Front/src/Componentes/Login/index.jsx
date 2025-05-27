@@ -55,7 +55,7 @@ export function Login(){
 
 	return(
 		<>
-			<Forms listInput={listInputLogin} method={handleSubmit} title="Login" textButton="Logar" />
+			<Forms listInput={listInputLogin} method={handleSubmit} title="Login" textButton="Entrar" />
 			<ErrorMessage menssage={errorMenssage} />
 		</>
 	)

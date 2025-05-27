@@ -18,6 +18,7 @@ body
     margin-left: 2rem
 
     .buttonNav
+        display: flex
         background-color: $color-button
         border: none
         border-radius: 0.2rem
@@ -25,9 +26,15 @@ body
         cursor: pointer
         font-size: 16px
         margin-top: 2rem
-        padding: 0.8rem 2rem
+        padding: 0.8rem 1rem
         transition: .5s all
-        width: 10vw
 
-    :hover
+        .iconPlus, .iconsArrowBigLeft
+            margin-right: 0.5rem
+            transition: transform 0.3s ease-in-out
+
+    .buttonNav:hover
         background-color: $color-button-hover
+
+        .iconPlus
+            transform: rotate(90deg)

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../Context/UserContext';
+import { UserPen } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { Card } from '../Card';
-import { Table } from '../Table';
 import { Modal } from '../Modal';
 import api from '../../Service/api';
 import './style.sass'
@@ -63,13 +64,29 @@ export function ListAnimais({ type }){
                 <div className="containerTable">
                     <table>
                         <thead>
-                            <th>Nome</th>
-                            <th>Raça</th>
-                            <th>Cor</th>
-                            <th>Ações</th>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Raça</th>
+                                <th>Cor</th>
+                                <th className='icons'>Ações</th>
+                            </tr>
                         </thead>
                     {animaisList.map((dado, key) => (
-                        <Table key={key} dado={dado} delAnimal={delAnimal} onEdit={handleOpenModal}/>
+                        <tbody>
+                            <tr key={dado.id || key }>
+                                <td className='itensTable'>{dado.nome}</td>
+                                <td className='itensTable'>{dado.raca}</td>
+                                <td className='itensTable'>{dado.cor}</td>
+                                <td className='icons'>
+                                    <button onClick={() => delAnimal(dado.id)}>
+                                        <Trash2 className='trash'/>
+                                    </button>
+                                    <button onClick={() => handleOpenModal(dado)}>
+                                        <UserPen className='userPen'/>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
                     ))}
                     </table>
                 </div>
@@ -79,7 +96,7 @@ export function ListAnimais({ type }){
                 <Modal
                     isOpen={isOpen}
                     onClose={handleCloseModal}
-                    animalSelecionado={animaisList}
+                    animalSelecionado={animalSelecionado}
                 />
             )}
         </>

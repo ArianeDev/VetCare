@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
 import { ErrorMessage } from "../ErrorMenssage";
+import { Forms } from "../Forms";
 import { Header } from "../Header";
 
 export function Register(){
@@ -44,62 +45,48 @@ export function Register(){
 		}
 	}
 
+	const listInputRegister = [
+		{
+			"type": "text",
+			"placeholder": "Digite seu usuário...",
+			"value": username,
+			"setFunction": setUsername,
+			"labelName": "Usuário:"
+		},
+		{
+			"type": "text",
+			"placeholder": "Digite seu email...",
+			"value": email,
+			"setFunction": setEmail,
+			"labelName": "Email:"
+		},
+		{
+			"type": "text",
+			"placeholder": "Digite seu CPF...",
+			"value": cpf,
+			"setFunction": setCpf,
+			"labelName": "CPF:"
+		},
+		{
+			"type": "password",
+			"placeholder": "Digite sua senha...",
+			"value": password,
+			"setFunction": setPassword,
+			"labelName": "Senha:"
+		},
+		{
+			"type": "password",
+			"placeholder": "Confirme sua senha...",
+			"value": confirmationPassword,
+			"setFunction": setConfirmationPassword,
+			"labelName": "Confirmar senha:"
+		}
+	]
+
 	return(
 		<div>
-			<h1>Cadastrar</h1>
-			<form action="" onSubmit={handleSubmit}>
-				<label>Username</label>
-				<input 
-					type="text" 
-					placeholder="username" 
-					value={username} 
-					onChange={(e) => setUsername(e.target.value) }
-					required
-				/>
-				<label>Email</label>
-				<input 
-					type="email" 
-					placeholder="email" 
-					value={email} 
-					onChange={(e) => setEmail(e.target.value) }
-					required
-				/>
-				<label>CPF</label>
-				<input 
-					type="text" 
-					placeholder="cpf" 
-					value={cpf} 
-					onChange={(e) => setCpf(e.target.value) }
-					required
-				/>
-				<label>Endereço</label>
-				<input 
-					type="text" 
-					placeholder="endereço" 
-					value={endereco} 
-					onChange={(e) => setEndereco(e.target.value) }
-					required
-				/>
-				<label>Senha</label>
-				<input 
-					type="password" 
-					placeholder="password" 
-					value={password} 
-					onChange={(e) => setPassword(e.target.value) }
-					required
-				/>
-				<label>Confirmar senha</label>
-				<input 
-					type="password" 
-					placeholder="confirm password" 
-					value={confirmationPassword} 
-					onChange={(e) => setConfirmationPassword(e.target.value) }
-					required
-				/>
-				<br />
-				<ErrorMessage menssage={errorMenssage} />
-				<input type="submit" value="Enviar" />
-			</form>
+			<Forms listInput={listInputRegister} method={handleSubmit} title="Cadastrar" textButton="Cadastrar"/>
+			<ErrorMessage menssage={errorMenssage} />
 		</div>
 	)
 }

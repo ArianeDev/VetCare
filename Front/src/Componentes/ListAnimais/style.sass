@@ -13,7 +13,7 @@ $color-white: rgb(255,255,255)
 	table
 		background-color: $color-white
 		border-radius: 0.2rem
-		padding: 1rem
+		padding: 2rem 3rem
 		width: 82vw
 		margin-top: 1rem
 
@@ -21,29 +21,41 @@ $color-white: rgb(255,255,255)
 			height: 6vh
 
 			th
+				text-align: start
 				font-weight: 500
 				word-wrap: break-word
 				overflow-wrap: break-word
+
+			.icons
+				text-align: center
+				width: 5rem
 
 		tbody
 
 			td
 				word-wrap: break-word
 				overflow-wrap: break-word
-				padding: 0 1rem
-
-			.itensTable
-				text-align: center
 			
 			.icons
 				display: flex
 				flex-direction: row-reverse
 				justify-content: space-between
 				height: 10vh
-				align-items: center
+				width: 5rem
 
-				.trash
-					color: rgb(218, 0, 0)
+				button
+					background-color: transparent
+					border: none
+					cursor: pointer
 
-				.userPen
-					color: rgb(167, 167, 167)
+					.trash, .userPen
+						transition: all .5s
+
+					.trash
+						color: rgb(218, 0, 0)
+
+					.userPen
+						color: rgb(167, 167, 167)
+
+					.trash:hover, .userPen:hover
+						color: rgb(222, 222, 222)
