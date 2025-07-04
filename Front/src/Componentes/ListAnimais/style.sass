@@ -1,7 +1,9 @@
 .containerList
 	display: grid
+	width: 100%
 	justify-content: center
 	grid-template-columns: 30% 30% 30%
+	padding: 1rem
 	gap: 1rem
 
 $color-white: rgb(255,255,255)
@@ -59,3 +61,7 @@ $color-white: rgb(255,255,255)
 
 					.trash:hover, .userPen:hover
 						color: rgb(222, 222, 222)
+
+@media (max-width: 480px) 
+	.containerList
+		grid-template-columns: 100%

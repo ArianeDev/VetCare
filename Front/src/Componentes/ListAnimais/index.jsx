@@ -57,7 +57,14 @@ export function ListAnimais({ type }){
             {type === "card" ? (
                 <div className='containerList'>
                     {animaisList.map((dado, key) => (
-                        <Card key={key} dado={dado} />
+                        <Card key={key} dado={dado}>
+                            <button onClick={() => delAnimal(dado.id)}>
+                                <Trash2 className='trash'/>
+                            </button>
+                            <button onClick={() => handleOpenModal(dado)}>
+                                <UserPen className='userPen'/>
+                            </button>
+                        </Card >
                     ))}
                 </div>
             ) : (

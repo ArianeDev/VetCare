@@ -92,9 +92,6 @@ export function Modal({animalSelecionado, onClose, isOpen}){
                         <Forms listInput={listInputAtualizar} method={handleSubmitUpdate} title="Atualizar" textButton="Atualizar"/>
                         <ErrorMessage menssage={errorMenssage} />
                     </div>
-                    <div className="header">
-                        <img src={animalSelecionado.foto} alt="Fotinha do pet" />
-                    </div>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ export function Home(){
 							Cadastrar
 						</button>
 					</div>
-					<ListAnimais type="tabela"/>
+					<ListAnimais type="card"/>
 				</>
 
 			)}

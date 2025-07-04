@@ -68,6 +68,13 @@ export function Register(){
 			"labelName": "CPF:"
 		},
 		{
+			"type": "text",
+			"placeholder": "Digite seu endereço...",
+			"value": endereco,
+			"setFunction": setEndereco,
+			"labelName": "Endereço:"
+		},
+		{
 			"type": "password",
 			"placeholder": "Digite sua senha...",
 			"value": password,
