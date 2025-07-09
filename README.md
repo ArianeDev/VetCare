@@ -1,4 +1,4 @@
-# VetCare
+# 🐇 VetCare
 
 Este é um sistema desenvolvido para facilitar o atendimento em petshops. Com ele, o usuário pode cadastrar seus animais de forma rápida e segura, 
 garantindo que todas as informações estejam disponíveis para os profissionais na hora do atendimento. O objetivo é tornar a experiência mais organizada, 
