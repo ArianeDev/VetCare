@@ -21,7 +21,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você instalou a versão mais recente de do Python e do node.js
 
-## 🚀 Instalando <nome_do_projeto>
+## 🚀 Instalando VetCare
 
 Para instalar o <nome_do_projeto>, siga estas etapas:
 
